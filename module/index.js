@@ -39,6 +39,9 @@ module.exports = function(options){
             });
         } else if (req.session.oauth.flow && req.session.oauth.flow == 'implicit'){
             // Request is the redirect of Implicit Flow.
+            /*
+             * This code block will not be used since the redirect url should be other than this url in case of implicit flow.
+             */
             res.status(200).end();
         } else {
             // Request is the initiation of OAuth.
