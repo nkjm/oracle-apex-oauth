@@ -3,8 +3,6 @@
 const express = require('express');
 const app = express();
 const session = require('express-session');
-const uuid = require('uuid');
-const request = require('request');
 const oracleApexOauth = require('./oracle-apex-oauth');
 
 module.exports = function(options){

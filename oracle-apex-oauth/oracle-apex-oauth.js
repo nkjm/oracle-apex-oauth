@@ -7,7 +7,9 @@ module.exports = class oracleApexOauth {
 
     constructor(session, workspace, flow, client_id, client_secret, redirect_url) {
         this._session = session;
-        this._session.oauth = {};
+        if (typeof this._session.oauth == 'undefined'){
+            this._session.oauth = {};
+        }
         this._workspace = workspace;
         this._flow = flow;
         this._client_id = client_id;
