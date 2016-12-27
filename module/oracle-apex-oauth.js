@@ -17,10 +17,25 @@ module.exports = class oracleApexOauth {
         this._redirect_url = redirect_url;
     }
 
-    get accessToken(){
-        return this._session.oauth_token.access_token;
+    getInitiateUrl(flow){
+        if (flow != 'implicit' && flow != 'code'){
+            return false;
+        }
+        this._session.oauth = {
+            flow: flow,
+            state: uuid.v4()
+        }
+        let initiateUrl;
+        if (flow == 'implicit'){
+            initiateUrl = "https://apex.oracle.com/pls/apex/" + this._workspace + "/oauth2/auth?response_type=token&client_id=" + this._client_id + "&state=" + this._session.oauth.state;
+        } else if (flow == 'code'){
+            initiateUrl = "https://apex.oracle.com/pls/apex/" + this._workspace + "/oauth2/auth?response_type=code&client_id=" + this._client_id + "&state=" + this._session.oauth.state;
+        }
+        console.log("initiateUrl is " + initiateUrl);
+        return initiateUrl;
     }
 
+    /*
     initiate(res, flow){
         if (flow != 'implicit' && flow != 'code'){
             res.status(400).json("flow not specified.");
@@ -42,6 +57,7 @@ module.exports = class oracleApexOauth {
         console.log("Going to redirect user to " + url);
         res.redirect(url);
     }
+    */
 
     aquireAccessToken(authorization_code, state, success_cb, fail_cb){
         /*
