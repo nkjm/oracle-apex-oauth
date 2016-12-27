@@ -62,6 +62,7 @@ module.exports = function(options){
     });
 
     app.get('/logout', function(req, res, next){
+        console.log(req.session);
         if (req.session.oauth){
             console.log(req.session.oauth);
             req.session.oauth = null;
