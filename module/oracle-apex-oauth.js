@@ -35,30 +35,6 @@ module.exports = class oracleApexOauth {
         return initiateUrl;
     }
 
-    /*
-    initiate(res, flow){
-        if (flow != 'implicit' && flow != 'code'){
-            res.status(400).json("flow not specified.");
-            return;
-        }
-
-        console.log("flow is " + flow);
-
-        this._session.oauth.state = uuid.v4();
-        console.log("state is " + this._session.oauth.state);
-
-        let url;
-        if (flow == 'implicit'){
-            url = "https://apex.oracle.com/pls/apex/" + this._workspace + "/oauth2/auth?response_type=token&client_id=" + this._client_id + "&state=" + this._session.oauth.state;
-        } else if (flow == 'code'){
-            url = "https://apex.oracle.com/pls/apex/" + this._workspace + "/oauth2/auth?response_type=code&client_id=" + this._client_id + "&state=" + this._session.oauth.state;
-        }
-
-        console.log("Going to redirect user to " + url);
-        res.redirect(url);
-    }
-    */
-
     aquireAccessToken(authorization_code, state, success_cb, fail_cb){
         /*
          * This state validation should be performed but it seems sent stat is not passed to Token Server when authentication runs. So tempolary disabling this validation.
