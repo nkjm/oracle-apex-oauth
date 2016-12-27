@@ -3,6 +3,13 @@
 const express = require('express');
 const oauth = require('./oracle-apex-oauth/index.js');
 const app = express();
+const session = require('express-session');
+
+app.use(session({
+    secret: process.env.CLIENT_ID,
+    resave: false,
+    saveUninitialized: false
+}));
 
 const port = (process.env.PORT || 5000);
 const server = app.listen(port, function(){
@@ -19,7 +26,11 @@ app.use('/oauth', oauth({
 }));
 
 app.get('/', function(req, res, next){
-    res.send('This is /');
+    if (req.session.oauth){
+        res.json(req.session.oauth);
+    } else {
+        res.send('This is /');
+    }
 });
 
 module.exports = app;

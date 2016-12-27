@@ -27,7 +27,7 @@ module.exports = function(options){
             });
         } else {
             // This is the initiation of OAuth.
-            oauth.inititate(res, options.flow);
+            oauth.initiate(res, options.flow);
         }
     });
 
