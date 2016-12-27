@@ -1,0 +1,31 @@
+{
+  "name": "oracle-apex-oauth",
+  "version": "1.0.0",
+  "description": "OAuth library for apex.oracle.com.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nkjm/oracle-apex-oauth.git"
+  },
+  "keywords": [
+    "OAuth",
+    "Oracle",
+    "Apex"
+  ],
+  "author": "Kazuki Nakajima",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nkjm/oracle-apex-oauth/issues"
+  },
+  "homepage": "https://github.com/nkjm/oracle-apex-oauth#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "express-session": "^1.14.2",
+    "request": "^2.79.0",
+    "uuid": "^3.0.1"
+  }
+}
