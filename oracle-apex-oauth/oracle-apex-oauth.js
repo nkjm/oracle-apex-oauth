@@ -24,7 +24,7 @@ module.exports = class oracleApexOauth {
 
         console.log("flow is " + flow);
 
-        let this._session.oauth.state = uuid.v4();
+        this._session.oauth.state = uuid.v4();
         console.log("state is " + this._session.oauth.state);
 
         let url;
