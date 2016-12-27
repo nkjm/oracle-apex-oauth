@@ -1,5 +1,8 @@
 'use strict';
 
+const uuid = require('uuid');
+const request = require('request');
+
 module.exports = class oracleApexOauth {
 
     constructor(session, workspace, flow, client_id, client_secret, redirect_url) {
