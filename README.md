@@ -26,7 +26,7 @@ app.use('/oauth', oauth({
 }));
 ```
 
-CLIENT_ID, CLIENT_SECRETは https://apex.oracle.com/pls/apex/あなたのワークスペース/ui/oauth2/clients/ Clientを登録することで作成できます。
+CLIENT_ID, CLIENT_SECRETは https://apex.oracle.com/pls/apex/あなたのワークスペース/ui/oauth2/clients/ でClientを登録することで作成できます。
 
 認証が成功すると、アクセストークンはセッションから取得できます。
 
