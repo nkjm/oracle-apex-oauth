@@ -1,4 +1,4 @@
-[English README](./README.en.md)
+[Go to English README](./README.en.md)
 
 # 概要
 

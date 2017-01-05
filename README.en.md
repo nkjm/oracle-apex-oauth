@@ -1,5 +1,3 @@
-[English README](https://github.com/nkjm/oracle-apex-oauth/README.en.md)
-
 # What is this?
 
 The npm package which allows 3rd party applications to access to the OAuth protected REST API hosted by apex.oracle.com.
