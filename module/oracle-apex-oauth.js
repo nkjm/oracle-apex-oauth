@@ -35,7 +35,7 @@ module.exports = class oracleApexOauth {
         return initiateUrl;
     }
 
-    aquireAccessToken(authorization_code, state, success_cb, fail_cb){
+    acquireAccessToken(authorization_code, state, success_cb, fail_cb){
         /*
          * This state validation should be performed but it seems sent stat is not passed to Token Server when authentication runs. So tempolary disabling this validation.
          */

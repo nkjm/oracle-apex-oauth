@@ -1,6 +1,6 @@
 {
   "name": "oracle-apex-oauth",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "OAuth library for apex.oracle.com.",
   "main": "index.js",
   "scripts": {

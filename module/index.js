@@ -28,7 +28,7 @@ module.exports = function(options){
 
         if (req.query.code){
             // Request is the redirect of Authentication Code Flow.
-            oauth.aquireAccessToken(req.query.code, req.query.state, function(response){
+            oauth.acquireAccessToken(req.query.code, req.query.state, function(response){
                 if (options.login_url){
                     res.redirect(options.login_url);
                     return;
