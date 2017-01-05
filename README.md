@@ -1,3 +1,5 @@
+[English README](./README.en.md)
+
 # 概要
 
 apex.oracle.comのRESTful ServicesでOAuth2.0で保護されたAPIにNodeアプリからアクセスするためのnpm packageです。
@@ -19,7 +21,7 @@ const oauth = require('oracle-apex-oauth');
 app.use('/oauth', oauth({
     client_id: 'あたたのCLIENT ID', // 必須
     client_secret: 'あなたのCLIENT SECRET', // 必須
-    workspace: 'あなたのAPEX WORKSPACE', 必須
+    workspace: 'あなたのAPEX WORKSPACE', // 必須
     flow: 'code', // オプション codeまたはimplicit デフォルトはcode
     login_url: '/', // オプション トークン取得後にリダクレクトされるURL
     logout_url: '/' // オプション ログアウト（トークン削除）後にリダイレクトされるURL
@@ -52,3 +54,5 @@ app.get('/', function(req, res, next){
 延長するには、/oauthを認証開始パスに設定した場合は/oauth/refreshにアクセスします。
 
 また、アクセストークンはサーバー側のセッション（express-session）に格納されていますが、これを削除（ログアウト）するには、/oauthを認証開始パスに設定した場合には/oauth/logoutにアクセスします。ただし、この操作は単にNodeの実行環境からトークン情報を削除するだけで、apex.oracle.com側では依然として削除したトークンは有効です。
+
+また、oracle-apex-oauthはトークンの格納先としてexpress-sessionのデフォルトであるcacheを使用していますが、これは開発目的のストレージです。本番環境に適用する場合はこのストレージを他の永続的なストレージに変更する必要があります。
