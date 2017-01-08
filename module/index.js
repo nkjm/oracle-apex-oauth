@@ -1,9 +1,8 @@
 'use strict';
 
 const express = require('express');
-const app = express();
+const router = express.Router();
 const session = require('express-session');
-const url = require('url');
 const oracleApexOauth = require('./oracle-apex-oauth');
 
 module.exports = function(options){
@@ -16,18 +15,8 @@ module.exports = function(options){
     if (typeof options.flow == 'undefined'){
         options.flow = 'code';
     }
-    if (typeof options.store == 'undefined'){
-        options.store = new session.MemoryStore();
-    }
 
-    app.use(session({
-        secret: options.client_id,
-        resave: false,
-        saveUninitialized: false,
-        store: options.store
-    }));
-
-    app.get('/', function(req, res, next){
+    router.get('/', function(req, res, next){
         let oauth = new oracleApexOauth(req.session, options.workspace, options.flow, options.client_id, options.client_secret, options.redirect_url);
 
         if (req.query.code){
@@ -55,7 +44,7 @@ module.exports = function(options){
         }
     });
 
-    app.get('/refresh', function(req, res, next){
+    router.get('/refresh', function(req, res, next){
         let oauth = new oracleApexOauth(req.session, options.workspace, options.flow, options.client_id, options.client_secret, options.redirect_url);
         oauth.refreshAccessToken(function(response){
             if (options.login_url){
@@ -68,7 +57,7 @@ module.exports = function(options){
         });
     });
 
-    app.get('/logout', function(req, res, next){
+    router.get('/logout', function(req, res, next){
         if (req.session.oauth){
             delete req.session.oauth;
         }
@@ -79,5 +68,5 @@ module.exports = function(options){
         res.status(200).end();
     });
 
-    return app;
+    return router;
 }

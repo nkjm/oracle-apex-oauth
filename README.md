@@ -12,7 +12,19 @@ $ npm install oracle-apex-oauth --save
 
 # 利用方法
 
-認証をおこなうには認証を開始したいパスにoracle-apex-oauthをマウントします。
+oracle-apex-oauthはexpress-sessionパッケージでセッション管理をすることが前提となっています。したがってまずexpress-sessionをインポートし、適当な設定とともにマウントします。
+
+```
+const session = require('express-session');
+
+app.use(session({
+    secret: 'あなたの秘密鍵', // セッションID cookieに署名するための秘密鍵。任意の文字列でOKです。
+    resave: false,
+    saveUninitialized: false
+}));
+```
+
+次に、認証を開始したいパスにoracle-apex-oauthをマウントします。
 下記の例では/oauthにアクセスすると認証が開始されます。
 
 ```
@@ -33,14 +45,6 @@ CLIENT_ID, CLIENT_SECRETは https://apex.oracle.com/pls/apex/あなたのワー�
 認証が成功すると、アクセストークンはセッションから取得できます。
 
 ```
-const session = require('express-session');
-
-app.use(session({
-    secret: 'あなたのClient Id',
-    resave: false,
-    saveUninitialized: false
-}));
-
 app.get('/', function(req, res, next){
     if (req.session.oauth){
         res.json(req.session.oauth);
@@ -55,4 +59,19 @@ app.get('/', function(req, res, next){
 
 また、アクセストークンはサーバー側のセッション（express-session）に格納されていますが、これを削除（ログアウト）するには、/oauthを認証開始パスに設定した場合には/oauth/logoutにアクセスします。ただし、この操作は単にNodeの実行環境からトークン情報を削除するだけで、apex.oracle.com側では依然として削除したトークンは有効です。
 
-また、oracle-apex-oauthはトークンの格納先としてexpress-sessionのデフォルトであるcacheを使用していますが、これは開発目的のストレージです。本番環境に適用する場合はこのストレージを他の永続的なストレージに変更する必要があります。
+また、oracle-apex-oauthはトークンの格納先としてexpress-sessionのデフォルトであるMemoryStoreを使用していますが、これは開発目的専用のストレージです。本番環境に適用する場合は下記の例のようにこのストレージを他のストレージ実装に変更する必要があります。
+
+```
+const session = require('express-session');
+const mongo = require('connect-mongo')(session);
+const store = new mongo({ url: 'YOUR_MONGO_URI' });
+
+app.use(session({
+    secret: 'YOUR_SECRET_KEY',
+    resave: false,
+    saveUninitialized: false,
+    store: store // Added
+}));
+```
+
+上の例ではMongoDBをストレージとして使用しています。

@@ -1,6 +1,6 @@
 {
   "name": "oracle-apex-oauth",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "OAuth library for apex.oracle.com.",
   "main": "index.js",
   "scripts": {
@@ -25,7 +25,6 @@
     "express": "^4.14.0",
     "express-session": "^1.14.2",
     "request": "^2.79.0",
-    "url": "^0.11.0",
     "uuid": "^3.0.1"
   }
 }
