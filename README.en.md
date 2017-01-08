@@ -53,4 +53,4 @@ To extend the life of access token, access /oauth/refresh if you mount oracle-ap
 
 The access token is saved in the server-side session. If you like to delete it, access /oauth/logout if you mount oracle-apex-oauth on /oauth. But please be noted that this operation just deletes the token from server-side session but does not disable the token itself. Which means the token is stile valid at apex.oracle.com even if you did logout at 3rd party application.
 
-Also be noted that oracle-apex-oauth uses default cache of express-session as token store which is for development. If you apply this application to production environment, you should replace the store to other persistent store.
+Also be noted that by defaut, oracle-apex-oauth uses MemoryStore of express-session as token store which is for development. If you apply this application to production environment, you should replace the store to other persistent store.

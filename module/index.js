@@ -16,11 +16,15 @@ module.exports = function(options){
     if (typeof options.flow == 'undefined'){
         options.flow = 'code';
     }
+    if (typeof options.store == 'undefined'){
+        options.store = new session.MemoryStore();
+    }
 
     app.use(session({
         secret: options.client_id,
         resave: false,
-        saveUninitialized: false
+        saveUninitialized: false,
+        store: options.store
     }));
 
     app.get('/', function(req, res, next){
